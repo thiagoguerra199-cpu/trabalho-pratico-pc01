@@ -8,18 +8,16 @@ A proposta deve apresentar uma ideia simples, clara e viável para ser desenvolv
 
 Escreva aqui o nome provisório do jogo.
 
-Exemplo:
-
-> Corrida dos Obstáculos
+> Emoji Match
 
 ## 2. Integrantes do grupo
 
 Liste os integrantes do grupo.
 
-- Nome 1:
-- Nome 2:
-- Nome 3:
-- Nome 4:
+- Nome 1:Alexandre de Souza Freitas Martins
+- Nome 2:Gabriel Cédric Carvalho Damazio
+- Nome 3:Thiago Guerra de Araujo
+
 
 ## 3. Tipo de jogo
 
@@ -42,7 +40,7 @@ Exemplos:
 
 Tipo escolhido pelo grupo:
 
-> Escreva aqui.
+> Jogo da Memória
 
 ## 4. Descrição geral do jogo
 
@@ -57,7 +55,7 @@ Procure responder:
 
 Descrição:
 
-> Escreva aqui.
+> O jogo consiste em um tabuleiro com cartas viradas para baixo, cada uma contendo um emoji escondido. O jogador controla a partida escolhendo duas cartas por vez para revelar seus emojis. O objetivo é encontrar todos os pares iguais utilizando o menor número possível de tentativas.
 
 ## 5. Objetivo do jogador
 
@@ -75,7 +73,7 @@ Exemplos:
 
 Objetivo:
 
-> Escreva aqui.
+> Acertar todos os pares de emojis com o menor número de tentativas
 
 ## 6. Regras principais
 
@@ -91,11 +89,11 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1:
-- Regra 2:
-- Regra 3:
-- Regra 4:
-- Regra 5:
+- Regra 1: O jogador começa com 0 tentativas e 0 pontos
+- Regra 2: A cada duas cartas em que o jogador clicar será equivalente a uma tentativa
+- Regra 3: Cada duas cartas iguais vale 1 ponto
+- Regra 4: Se as cartas forem diferentes, elas são viradas novamente para baixo.
+- Regra 5: O jogo termina quando todos os pares de cartas foram encontrados. 
 
 ## 7. Condição de vitória
 
@@ -111,7 +109,7 @@ Exemplos:
 
 Condição de vitória:
 
-> Escreva aqui.
+> O jogador vence ao encontrar todos os pares de emojis do tabuleiro. Ao final da partida, o sistema exibe a quantidade de tentativas realizadas. Quanto menor o número de tentativas, melhor o desempenho do jogador.
 
 ## 8. Condição de derrota ou encerramento
 
@@ -127,7 +125,7 @@ Exemplos:
 
 Condição de derrota ou encerramento:
 
-> Escreva aqui.
+> A partida termina quando o jogador encontra todos os pares de emojis presentes no tabuleiro. Como o jogo não possui vidas nem limite de tempo, não há uma condição de derrota.
 
 ## 9. Elementos previstos no jogo
 
@@ -141,7 +139,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> Um tabuleiro contendo cartas com emojis
 
 ## Obstáculos, inimigos ou desafios
 
@@ -151,7 +149,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O desafio é memorizar a posição dos emojis para encontrar os pares com menos tentativas.
 
 ## Itens, alvos ou objetos de interação
 
@@ -161,7 +159,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> As cartas com emojis
 
 ## Pontuação, vidas, tempo ou progresso
 
@@ -171,7 +169,7 @@ Exemplo:
 
 Descrição:
 
-> Escreva aqui.
+> O jogador começa com 0 tentativas, o jogo registra o número de tentativas e o progresso é medido pela quantidade de pares encontrados.
 
 ## 10. Controles previstos
 
@@ -188,9 +186,8 @@ Exemplo:
 
 Controles do grupo:
 
-- Tecla/comando:
-- Tecla/comando:
-- Tecla/comando:
+- Tecla/comando: Botão esquerdo do mouse: Revelar o emoji da carta
+
 
 ## 11. Organização inicial do código
 
@@ -206,7 +203,14 @@ Exemplo:
 
 Organização planejada:
 
-> Escreva aqui.
+> * `main.py`: inicia a execução do jogo;
+* `src/jogo.py`: contém a lógica principal da partida;
+* `src/sprites.py`: gerencia os emojis e elementos visuais do jogo;
+* `src/config.py`: armazena configurações do jogo;
+* `src/funcoes.py`: reúne funções auxiliares;
+* `src/dados.py`: realiza a leitura e gravação de dados;
+* `tests/test_logica.py`: contém testes da lógica do jogo.
+
 
 
 ## 12. Recursos externos previstos
@@ -222,11 +226,7 @@ Exemplo:
 
 Recursos previstos:
 
-> Escreva aqui.
-
-Caso não pretenda utilizar recursos externos, escreva:
-
-> Não pretendemos utilizar recursos externos.
+> Emojis utilizados nas cartas do jogo ou imagens dos emojis
 
 ## 13. Principais dificuldades esperadas
 
@@ -245,9 +245,9 @@ Exemplos:
 
 Dificuldades previstas:
 
-- Dificuldade 1:
-- Dificuldade 2:
-- Dificuldade 3:
+- Dificuldade 1: Implementar a lógica para verificar se duas cartas formam um par.
+- Dificuldade 2: Embaralhar as cartas e organizar o tabuleiro corretamente.
+- Dificuldade 3: Controlar as tentativas e exibir as informações na tela.
 
 ## 14. Escopo mínimo para a entrega final
 
@@ -261,7 +261,7 @@ Exemplo:
 
 Escopo mínimo:
 
-> Escreva aqui.
+> A versão mínima do jogo terá um tabuleiro com cartas contendo pares de emojis, sistema de seleção de cartas pelo jogador, verificação de pares, contador de tentativas e tela de vitória ao encontrar todos os pares.
 
 ## 15. Possíveis melhorias, caso haja tempo
 
@@ -281,6 +281,6 @@ Exemplos:
 
 Melhorias possíveis:
 
-- Melhoria 1:
-- Melhoria 2:
-- Melhoria 3:
+- Melhoria 1: Sistema de níveis, em que a dificuldade aumenta após cada vitória.
+- Melhoria 2: Diminuir gradualmente o tempo de exibição das cartas conforme o jogador avança de nível.
+- Melhoria 3: Adicionar uma tela inicial e uma tela de vitória mais elaborada.
