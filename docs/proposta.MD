@@ -89,9 +89,9 @@ Exemplo:
 
 Regras do grupo:
 
-- Regra 1: O jogador começa com 0 tentativas e 0 pontos
+- Regra 1: O jogador começa com 0 tentativas 
 - Regra 2: A cada duas cartas em que o jogador clicar será equivalente a uma tentativa
-- Regra 3: Cada duas cartas iguais vale 1 ponto
+- Regra 3: Se os emojis forem iguais, as cartas permanecem visíveis.
 - Regra 4: Se as cartas forem diferentes, elas são viradas novamente para baixo.
 - Regra 5: O jogo termina quando todos os pares de cartas foram encontrados. 
 
