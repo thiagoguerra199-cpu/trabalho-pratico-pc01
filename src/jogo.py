@@ -7,9 +7,6 @@ class InteracaoJogador:
         self.tempo_espera = 0         
         self.atraso = 1000            
     def processar_clique(self, pos_mouse, lista_cartas):
-        """
-        Função chamada pela Pessoa 1 quando ocorre um clique do mouse.
-        """
         
         if self.bloqueado:
             return
@@ -19,16 +16,12 @@ class InteracaoJogador:
                 self.cartas_selecionadas.append(carta)
                 if len(self.cartas_selecionadas) == 2:
                     self.bloqueado = True
-                    self.tempo_espera = pygame.time.get_ticks() # Marca o tempo atual
+                    self.tempo_espera = pygame.time.get_ticks() 
     
                 break 
 
     def atualizar(self):
-        """
-        Função chamada pela Pessoa 1 a cada frame do loop principal.
-        Cuida de esconder as cartas caso estejam erradas.
-        """
-        
+
         if self.bloqueado and len(self.cartas_selecionadas) == 2:
             tempo_atual = pygame.time.get_ticks()
             if tempo_atual - self.tempo_espera >= self.atraso:
