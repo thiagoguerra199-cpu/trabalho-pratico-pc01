@@ -1,5 +1,48 @@
 import pygame
 
+class InteracaoJogador:
+    def __init__(self):
+        self.cartas_selecionadas = [] 
+        self.bloqueado = False        
+        self.tempo_espera = 0         
+        self.atraso = 1000            
+    def processar_clique(self, pos_mouse, lista_cartas):
+        """
+        Função chamada pela Pessoa 1 quando ocorre um clique do mouse.
+        """
+        
+        if self.bloqueado:
+            return
+        for carta in lista_cartas:
+            if carta.rect.collidepoint(pos_mouse) and not carta.revelada and not carta.combinada:
+                carta.revelada = True
+                self.cartas_selecionadas.append(carta)
+                if len(self.cartas_selecionadas) == 2:
+                    self.bloqueado = True
+                    self.tempo_espera = pygame.time.get_ticks() # Marca o tempo atual
+    
+                break 
+
+    def atualizar(self):
+        """
+        Função chamada pela Pessoa 1 a cada frame do loop principal.
+        Cuida de esconder as cartas caso estejam erradas.
+        """
+        
+        if self.bloqueado and len(self.cartas_selecionadas) == 2:
+            tempo_atual = pygame.time.get_ticks()
+            if tempo_atual - self.tempo_espera >= self.atraso:
+                carta1, carta2 = self.cartas_selecionadas
+                if carta1.valor == carta2.valor:
+                    carta1.combinada = True
+                    carta2.combinada = True
+                else:
+                    carta1.revelada = False
+                    carta2.revelada = False
+
+                self.cartas_selecionadas.clear()
+                self.bloqueado = False
+    
 from src.config import (
     LARGURA_TELA,
     ALTURA_TELA,
