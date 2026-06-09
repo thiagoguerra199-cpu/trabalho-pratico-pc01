@@ -1,10 +1,8 @@
-
-
+import random
 import pygame
-
-
-LARGURA_CARTA = 100
-ALTURA_CARTA = 100
+from src.config import (
+    LARGURA_CARTA, ALTURA_CARTA, BRANCO, PRETO, AZUL_CARTA
+)
 
 class Carta:
     def __init__(self, x, y, emoji):
@@ -14,8 +12,8 @@ class Carta:
 
     def desenhar(self, tela, fonte):
         if self.revelada:
-            pygame.draw.rect(tela, (255, 255, 255), self.rect)
-            texto = fonte.render(self.emoji, True, (0, 0, 0))
+            pygame.draw.rect(tela, BRANCO, self.rect)
+            texto = fonte.render(self.emoji, True, PRETO)
             tela.blit(
                 texto,
                 (
@@ -24,13 +22,15 @@ class Carta:
                 )
             )
         else:
-            pygame.draw.rect(tela, (100, 100, 255), self.rect)
+            pygame.draw.rect(tela, AZUL_CARTA, self.rect)
 
-        pygame.draw.rect(tela, (0, 0, 0), self.rect, 2)
+        pygame.draw.rect(tela, PRETO, self.rect, 2)
 
 
 def criar_tabuleiro():
-    emojis = ["😀", "😎", "🐱", "🎮"]
+    # Criando pares de emojis
+    emojis = ["😀", "😎", "🐱", "🎮"] * 2
+    random.shuffle(emojis)
 
     cartas = []
 

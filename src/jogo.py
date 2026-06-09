@@ -35,108 +35,68 @@ def executar_jogo():
     relogio = pygame.time.Clock()
     rodando = True
 
-    # 1. Carregando as imagens recortadas do Spritesheet
-
-
-    # Jogador: usando tamanho 110x110 para capturar o quadrado perfeitamente
-    player_image = pegar_sprite(CAMINHO_SPRITES, x=110, y=120, width=190, height=190, scale=0.5)
-
-    # Gema pequena: usando tamanho 64x64
-    gem_image    = pegar_sprite(CAMINHO_SPRITES, x=900, y=690, width=200, height=200, scale=0.5)
-
-    # Morcego: usando tamanho 180x120 por causa das asas abertas
-    bat_image    = pegar_sprite(CAMINHO_SPRITES, x=905, y=1060, width=200, height=130, scale=0.5)
+    fonte = pygame.font.SysFont("Arial", 40)
     
-    # 2. Criando a estrutura de Sprites usando Dicionários
-    jogador = {
-        "imagem": player_image,
-        "rect": player_image.get_rect(topleft=(100, 100))
-    }
-
-    gema = {
-        "imagem": gem_image,
-        "rect": gem_image.get_rect(topleft=(500, 300))
-    }
+    # Inicialização do Jogo da Memória
+    cartas = criar_tabuleiro()
+    selecionadas = []
+    aguardando_fechar = False
+    tempo_espera = 0
     
-    inimigo = {
-        "imagem": bat_image,
-        "rect": bat_image.get_rect(topleft=(200, 500))
-    }
-
-    velocidade = 5
     pontos = 0
-    vidas = 3
     recorde = carregar_recorde(CAMINHO_RECORDE)
 
-    # Loop principal: processa entrada, atualiza estado e renderiza a cena.
     while rodando:
         relogio.tick(FPS)
+        agora = pygame.time.get_ticks()
 
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
+            
+            # Lógica de clique (Pessoa 3)
+            if evento.type == pygame.MOUSEBUTTONDOWN and not aguardando_fechar:
+                for carta in cartas:
+                    if carta.rect.collidepoint(evento.pos) and not carta.revelada:
+                        carta.revelada = True
+                        selecionadas.append(carta)
+                        
+                        if len(selecionadas) == 2:
+                            if verificar_par(selecionadas[0], selecionadas[1]):
+                                pontos = calcular_pontos(pontos, 10)
+                                selecionadas = []
+                                # Verifica se ganhou
+                                if all(c.revelada for c in cartas):
+                                    if pontos > recorde:
+                                        recorde = pontos
+                                        salvar_recorde(CAMINHO_RECORDE, recorde)
+                            else:
+                                # Errou: inicia timer para desvirar (Sua parte de Pessoa 4)
+                                aguardando_fechar = True
+                                tempo_espera = agora + ATRASO_REVELACAO
 
-        teclas = pygame.key.get_pressed()
+        # Lógica de atraso para desvirar as cartas
+        if aguardando_fechar and agora >= tempo_espera:
+            for carta in selecionadas:
+                carta.revelada = False
+            selecionadas = []
+            aguardando_fechar = False
 
-        # Movimentação alterando direto os eixos X e Y do retângulo do jogador
-        if teclas[pygame.K_LEFT]:
-            jogador["rect"].x -= velocidade
-        if teclas[pygame.K_RIGHT]:
-            jogador["rect"].x += velocidade
-        if teclas[pygame.K_UP]:
-            jogador["rect"].y -= velocidade
-        if teclas[pygame.K_DOWN]:
-            jogador["rect"].y += velocidade
-
-        # Limitando o jogador dentro das bordas da tela usando as propriedades do Rect
-        jogador["rect"].x = limitar_valor(jogador["rect"].x, 0, LARGURA_TELA - jogador["rect"].width)
-        jogador["rect"].y = limitar_valor(jogador["rect"].y, 0, ALTURA_TELA - jogador["rect"].height)
-
-        # Verificação de colisão com a Gema (antigo 'item')
-        if verificar_colisao(jogador["rect"], gema["rect"]):
-            pontos = calcular_pontos(pontos, 10)
-
-            # Move a gema de lugar ao coletar
-            gema["rect"].x += 80
-            gema["rect"].y += 50
-
-            # Se a gema sair da tela, volta para uma posição segura
-            if gema["rect"].x > LARGURA_TELA - gema["rect"].width:
-                gema["rect"].x = 50
-            if gema["rect"].y > ALTURA_TELA - gema["rect"].height:
-                gema["rect"].y = 50
-
-        # Verificação de colisão com o Inimigo
-        if verificar_colisao(jogador["rect"], inimigo["rect"]):
-            vidas = tomar_dano(vidas, 1)
-
-            # Afasta o inimigo ao colidir
-            inimigo["rect"].x += 80
-            inimigo["rect"].y += 50
-
-            if inimigo["rect"].x > LARGURA_TELA - inimigo["rect"].width:
-                inimigo["rect"].x = 50
-            if inimigo["rect"].y > ALTURA_TELA - inimigo["rect"].height:
-                inimigo["rect"].y = 50
-
-        # Regras de fim de jogo e recorde
-        if jogador_perdeu(vidas):
-            rodando = False
-
-        if pontos > recorde:
-            recorde = pontos
-            salvar_recorde(CAMINHO_RECORDE, recorde)
-
+        # Atualiza o título
         pygame.display.set_caption(
-            f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde} | Vidas: {vidas}"
+            f"{TITULO_JOGO} | Pontos: {pontos} | Recorde: {recorde}"
         )
 
         tela.fill(CINZA)
 
-        # Desenhando os elementos na tela passando a imagem e o rect de cada dicionário
-        tela.blit(gema["imagem"], gema["rect"])
-        tela.blit(inimigo["imagem"], inimigo["rect"])
-        tela.blit(jogador["imagem"], jogador["rect"])
+        # Desenha as cartas (Pessoa 2)
+        for carta in cartas:
+            carta.desenhar(tela, fonte)
+            
+        # Mensagem se vencer
+        if all(c.revelada for c in cartas):
+            txt_fim = fonte.render("Você Venceu!", True, PRETO)
+            tela.blit(txt_fim, (LARGURA_TELA // 2 - 100, 50))
 
         pygame.display.flip()
 

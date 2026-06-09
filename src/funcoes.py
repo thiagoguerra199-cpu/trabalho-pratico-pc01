@@ -25,3 +25,7 @@ def limitar_valor(valor, minimo, maximo):
 def verificar_colisao(retangulo_1, retangulo_2):
     """Verifica sobreposição entre dois retângulos do Pygame."""
     return retangulo_1.colliderect(retangulo_2)
+
+def verificar_par(carta1, carta2):
+    """Verifica se duas cartas possuem o mesmo emoji."""
+    return carta1.emoji == carta2.emoji
