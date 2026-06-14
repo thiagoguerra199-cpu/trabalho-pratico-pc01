@@ -3,11 +3,14 @@ from jogo import InteracaoJogador
 
 pygame.init()
 
-largura = 800
-altura = 600
+LARGURA = 800
+ALTURA = 600
+FPS = 60
 
-tela = pygame.display.set_mode((largura, altura))
+tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Jogo da Memoria")
+
+clock = pygame.time.Clock()
 
 interacao = InteracaoJogador()
 
@@ -22,7 +25,7 @@ while rodando:
         if evento.type == pygame.QUIT:
             rodando = False
 
-        if evento.type == pygame.MOUSEBUTTONDOWN:
+        elif evento.type == pygame.MOUSEBUTTONDOWN:
             interacao.processar_clique(evento.pos, lista_de_cartas)
 
     interacao.atualizar()
@@ -30,5 +33,7 @@ while rodando:
     tela.fill((30, 30, 30))
 
     pygame.display.update()
+
+    clock.tick(FPS)
 
 pygame.quit()
