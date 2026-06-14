@@ -9,11 +9,14 @@ class Carta:
         self.rect = pygame.Rect(x, y, LARGURA_CARTA, ALTURA_CARTA)
         self.emoji = emoji
         self.revelada = False
+        self.encontrada = False
 
     def desenhar(self, tela, fonte):
-        if self.revelada:
+        if self.revelada or self.encontrada:
             pygame.draw.rect(tela, BRANCO, self.rect)
+
             texto = fonte.render(self.emoji, True, PRETO)
+
             tela.blit(
                 texto,
                 (
@@ -28,7 +31,6 @@ class Carta:
 
 
 def criar_tabuleiro():
-    # Criando pares de emojis
     emojis = ["😀", "😎", "🐱", "🎮"] * 2
     random.shuffle(emojis)
 
@@ -37,10 +39,10 @@ def criar_tabuleiro():
     indice = 0
 
     for linha in range(2):
-        for coluna in range(2):
+        for coluna in range(4):
 
-            x = 150 + coluna * 150
-            y = 150 + linha * 150
+            x = 100 + coluna * 130
+            y = 150 + linha * 130
 
             carta = Carta(x, y, emojis[indice])
 
@@ -49,3 +51,23 @@ def criar_tabuleiro():
             indice += 1
 
     return cartas
+
+
+def desenhar_tentativas(tela, fonte, tentativas):
+    texto = fonte.render(
+        f"Tentativas: {tentativas}",
+        True,
+        PRETO
+    )
+
+    tela.blit(texto, (20, 20))
+
+
+def desenhar_vitoria(tela, fonte):
+    texto = fonte.render(
+        "Parabens! Voce venceu!",
+        True,
+        PRETO
+    )
+
+    tela.blit(texto, (150, 50))
