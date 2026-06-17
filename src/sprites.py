@@ -1,7 +1,7 @@
 import random
 import pygame
 from src.config import (
-    LARGURA_CARTA, ALTURA_CARTA, BRANCO, PRETO, AZUL_CARTA
+    LARGURA_CARTA, ALTURA_CARTA, BRANCO, PRETO, AZUL_CARTA, LARGURA_TELA, ALTURA_TELA
 )
 
 class Carta:
@@ -13,7 +13,7 @@ class Carta:
 
     def desenhar(self, tela, fonte):
         if self.revelada or self.encontrada:
-            pygame.draw.rect(tela, BRANCO, self.rect)
+            pygame.draw.rect(tela, BRANCO, self.rect, border_radius=10)
 
             texto = fonte.render(self.emoji, True, PRETO)
 
@@ -25,31 +25,35 @@ class Carta:
                 )
             )
         else:
-            pygame.draw.rect(tela, AZUL_CARTA, self.rect)
+            pygame.draw.rect(tela, AZUL_CARTA, self.rect, border_radius=10)
 
-        pygame.draw.rect(tela, PRETO, self.rect, 2)
+        # Borda da carta
+        pygame.draw.rect(tela, PRETO, self.rect, 3, border_radius=10)
 
 
 def criar_tabuleiro():
-    emojis = ["😀", "😎", "🐱", "🎮"] * 2
-    random.shuffle(emojis)
+    letras = ["A", "B", "C", "D", "E", "F", "G", "H"] * 2
+    random.shuffle(letras)
 
     cartas = []
+    colunas = 4
+    linhas = 4
+    espacamento = 20
+
+    # Centralizar o tabuleiro
+    largura_total = colunas * (LARGURA_CARTA + espacamento) - espacamento
+    altura_total = linhas * (ALTURA_CARTA + espacamento) - espacamento
+    offset_x = (LARGURA_TELA - largura_total) // 2
+    offset_y = (ALTURA_TELA - altura_total) // 2 + 30
 
     indice = 0
-
-    for linha in range(2):
-        for coluna in range(4):
-
-            x = 100 + coluna * 130
-            y = 150 + linha * 130
-
-            carta = Carta(x, y, emojis[indice])
-
+    for linha in range(linhas):
+        for coluna in range(colunas):
+            x = offset_x + coluna * (LARGURA_CARTA + espacamento)
+            y = offset_y + linha * (ALTURA_CARTA + espacamento)
+            carta = Carta(x, y, letras[indice])
             cartas.append(carta)
-
             indice += 1
-
     return cartas
 
 
