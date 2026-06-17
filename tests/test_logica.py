@@ -1,9 +1,13 @@
 from src.funcoes import calcular_pontos, jogador_perdeu, limitar_valor, verificar_par
 
 
-def test_calcular_pontos():
-    """Deve somar corretamente os pontos atuais com os pontos ganhos."""
-    assert calcular_pontos(10, 5) == 15
+def test_calcular_pontos_rapido():
+    """Deve retornar pontuação máxima (100) quando o tempo for 0."""
+    assert calcular_pontos(0) == 100
+
+def test_calcular_pontos_lento():
+    """Deve retornar a pontuação mínima (10) quando o jogador demorar muito."""
+    assert calcular_pontos(100) == 10
 
 
 def test_jogador_perdeu_com_zero_vidas():

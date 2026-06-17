@@ -1,11 +1,11 @@
 def salvar_recorde(caminho_arquivo, pontuacao):
-    """Salva a pontuação recorde em arquivo texto."""
+    """Abre o arquivo e sobrescreve com o novo valor de pontuação máxima."""
     with open(caminho_arquivo, "w", encoding="utf-8") as arquivo:
         arquivo.write(str(pontuacao))
 
 
 def carregar_recorde(caminho_arquivo):
-    """Carrega o recorde salvo; retorna 0 se não existir valor válido."""
+    """Tenta ler o arquivo de recorde. Retorna 0 se o arquivo não existir ou estiver vazio."""
     try:
         with open(caminho_arquivo, "r", encoding="utf-8") as arquivo:
             conteudo = arquivo.read().strip()

@@ -1,6 +1,10 @@
-def calcular_pontos(pontos_atual, pontos_ganhos):
-    """Soma os pontos ganhos à pontuação atual."""
-    return pontos_atual + pontos_ganhos
+from src.config import PONTOS_BASE_PAR, PENALIDADE_TEMPO, PONTOS_MINIMOS_PAR
+
+def calcular_pontos(tempo_segundos):
+    """Calcula a pontuação de um par baseada na rapidez (tempo em segundos).
+    Quanto mais rápido, maior a pontuação. Existe um valor mínimo garantido."""
+    pontos = PONTOS_BASE_PAR - (tempo_segundos * PENALIDADE_TEMPO)
+    return max(pontos, PONTOS_MINIMOS_PAR)
 
 
 def tomar_dano(vida_atual, dano):
@@ -23,9 +27,9 @@ def limitar_valor(valor, minimo, maximo):
 
 
 def verificar_colisao(retangulo_1, retangulo_2):
-    """Verifica sobreposição entre dois retângulos do Pygame."""
+    """Função utilitária para checar se dois objetos retangulares se encostam."""
     return retangulo_1.colliderect(retangulo_2)
 
 def verificar_par(carta1, carta2):
-    """Verifica se duas cartas possuem o mesmo emoji."""
+    """Compara o conteúdo de duas cartas para saber se são iguais."""
     return carta1.emoji == carta2.emoji
