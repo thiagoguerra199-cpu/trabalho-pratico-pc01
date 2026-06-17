@@ -32,8 +32,7 @@ from src.dados import (
 )
 
 
-def executar_jogo():
-    """Executa o loop principal do jogo e controla estado, colisões e pontuação."""
+def executar_jogo():l
     pygame.init()
     
     tela = pygame.display.set_mode((LARGURA_TELA, ALTURA_TELA))
