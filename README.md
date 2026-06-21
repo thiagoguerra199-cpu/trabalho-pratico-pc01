@@ -7,9 +7,9 @@ Este repositório é um template para os grupos da disciplina. A proposta é com
 ## Integrantes do grupo
 
 - Rafael Lima Pais
-- Nome do integrante 2
-- Nome do integrante 3
-- Nome do integrante 4
+- Alexandre de Souza Freitas Martins
+- Thiago Guerra de Araújo
+- Gabriel Cédric Carvalho Damazio
 
 ## Estrutura do projeto
 
