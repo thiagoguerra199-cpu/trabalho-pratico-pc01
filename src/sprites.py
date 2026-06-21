@@ -6,9 +6,9 @@ from src.config import (CORES_CARTAS,
 
 class Carta:
     """Classe que representa uma única carta no tabuleiro."""
-    def __init__(self, x, y, emoji):
+    def __init__(self, x, y, cor):
         self.rect = pygame.Rect(x, y, LARGURA_CARTA, ALTURA_CARTA)
-        self.emoji = emoji
+        self.cor = cor
         self.revelada = False
         self.encontrada = False
 
@@ -28,7 +28,7 @@ class Carta:
                 cor_rect_size,
                 cor_rect_size
             )
-            pygame.draw.rect(tela, self.emoji, cor_rect, border_radius=8)
+            pygame.draw.rect(tela, self.cor, cor_rect, border_radius=8)
             pygame.draw.rect(tela, BRANCO, cor_rect, 2, border_radius=8)
         else:
             pygame.draw.rect(tela, AZUL_CARTA, self.rect, border_radius=12)

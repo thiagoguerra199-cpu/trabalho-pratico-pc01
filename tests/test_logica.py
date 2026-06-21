@@ -35,13 +35,13 @@ def test_limitar_valor_dentro_do_intervalo():
     assert limitar_valor(50, 0, 100) == 50
 
 def test_verificar_par_sucesso():
-    """Deve retornar True quando os emojis forem iguais."""
-    class MockCarta: emoji = "A"
+    """Deve retornar True quando as cores forem iguais."""
+    class MockCarta: cor = "A"
     c1, c2 = MockCarta(), MockCarta()
     assert verificar_par(c1, c2) is True
 
 def test_verificar_par_falha():
-    """Deve retornar False quando os emojis forem diferentes."""
-    class MockCarta1: emoji = "A"
-    class MockCarta2: emoji = "B"
+    """Deve retornar False quando as cores forem diferentes."""
+    class MockCarta1: cor = "A"
+    class MockCarta2: cor = "B"
     assert verificar_par(MockCarta1(), MockCarta2()) is False

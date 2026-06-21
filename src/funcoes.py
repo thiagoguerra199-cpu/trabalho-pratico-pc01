@@ -32,4 +32,4 @@ def verificar_colisao(retangulo_1, retangulo_2):
 
 def verificar_par(carta1, carta2):
     """Compara duas cartas para verificar se são iguais."""
-    return carta1.emoji == carta2.emoji
+    return carta1.cor == carta2.cor

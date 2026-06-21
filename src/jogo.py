@@ -40,10 +40,10 @@ def desenhar_interface(tela, fonte, pontos, vidas, recorde, tempo):
     cor_texto = BRANCO
     cor_destaque = (52, 211, 153)
     
-    txt_pontos = fonte.render(f"⭐ Pontos: {pontos}", True, cor_destaque)
-    txt_vidas = fonte.render(f"❤ Vidas: {vidas}", True, cor_texto)
-    txt_recorde = fonte.render(f"🏆 Recorde: {recorde}", True, cor_destaque)
-    txt_tempo = fonte.render(f"⏱ Tempo: {tempo}s", True, cor_texto)
+    txt_pontos = fonte.render(f"Pontos: {pontos}", True, cor_destaque)
+    txt_vidas = fonte.render(f"Vidas: {vidas}", True, cor_texto)
+    txt_recorde = fonte.render(f"Recorde: {recorde}", True, cor_destaque)
+    txt_tempo = fonte.render(f"Tempo: {tempo}s", True, cor_texto)
     
     tela.blit(txt_pontos, (30, 12))
     tela.blit(txt_recorde, (30, 40))
@@ -153,7 +153,7 @@ def executar_jogo():
             fundo_overlay.fill((20, 35, 60))
             tela.blit(fundo_overlay, (0, 0))
             
-            txt_fim = fonte_grande.render("🎉 Você Venceu! 🎉", True, (52, 211, 153))
+            txt_fim = fonte_grande.render("Você Venceu!", True, (52, 211, 153))
             tela.blit(txt_fim, (LARGURA_TELA // 2 - txt_fim.get_width() // 2, ALTURA_TELA // 2 - 80))
             
             txt_pontos_final = pygame.font.SysFont("Segoe UI", 40, bold=True).render(f"Pontuação: {pontos}", True, BRANCO)
@@ -165,7 +165,7 @@ def executar_jogo():
             fundo_overlay.fill((60, 20, 20))
             tela.blit(fundo_overlay, (0, 0))
             
-            txt_derrota = fonte_grande.render("💀 Game Over! 💀", True, VERMELHO)
+            txt_derrota = fonte_grande.render("Game Over!", True, VERMELHO)
             tela.blit(txt_derrota, (LARGURA_TELA // 2 - txt_derrota.get_width() // 2, ALTURA_TELA // 2 - 80))
             
             txt_pontos_final = pygame.font.SysFont("Segoe UI", 40, bold=True).render(f"Pontuação: {pontos}", True, BRANCO)
