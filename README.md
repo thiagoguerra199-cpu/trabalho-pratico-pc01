@@ -34,11 +34,11 @@ Liste as principais regras do jogo.
 
 Exemplo:
 
-- O jogador começa com 0 tentativas.
+- O jogador começa com 8 tentativas.
 - A cada duas cartas clicadas, uma tentativa é contabilizada.
 - Se os itens revelados forem iguais, as cartas permanecem visíveis e descobertas.
 - Se os itens forem diferentes, as cartas são viradas novamente para baixo após um breve intervalo.
-- O jogo termina quando todos os pares de cartas foram encontrados.
+- O jogo termina quando todos os pares de cartas foram encontrados ou quando as tentativas acabam.
 - O vencedor é aquele que conseguir descobrir todos os pares com o menor número de tentativas
 
 Exemplo:
