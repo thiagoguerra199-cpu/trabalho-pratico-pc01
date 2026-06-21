@@ -31,5 +31,5 @@ def verificar_colisao(retangulo_1, retangulo_2):
     return retangulo_1.colliderect(retangulo_2)
 
 def verificar_par(carta1, carta2):
-    """Compara o conteúdo de duas cartas para saber se são iguais."""
+    """Compara duas cartas para verificar se são iguais."""
     return carta1.emoji == carta2.emoji
